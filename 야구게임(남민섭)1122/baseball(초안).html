@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            vertical-align: top;
+        }
+        body{
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        #wrap{
+            background-image: url(./img/pngwing.com\ \(1\).png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size:#ffbec8 ;
+            position: relative;
+            height: 90vh;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        li{list-style: none;}
+        #lightboard{
+            display: flex;
+            height: 130px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 50px;
+        }
+        table{
+            width: 80%;
+            height: 100%;
+            border-collapse: collapse;
+            background-color: black;
+            color: yellow;
+        }
+        tr,td,th{
+            border: 1px solid #333;
+            padding: 5PX;
+        }
+        #strikeballout{
+            background-color: black;
+            color: yellow;
+            height: 100%;
+            width: 20%;
+            
+        }
+        #strikeballout ul{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100%;
+            padding-left: 30px;
+        }
+        #result{
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 34px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="people"></div>
+        <div id="lightboard">
+            <table>
+                <thead>
+                    <tr>
+                        <th>TEAM</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="strikeballout">
+                <ul>
+                    <li>S<p></p></li>
+                    <li>B<p></p></li>
+                    <li>O<p></p></li>
+                </ul>
+            </div>
+        </div>
+        <p id="result">ooooo</p>
+    </div>
+</body>
+</html>

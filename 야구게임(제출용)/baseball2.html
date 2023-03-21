@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <style>
+       
+        @font-face {
+            font-family: 'Tenada';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Tenada.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        li{list-style: none;}
+        body{
+            background-image: url(./img/stadium-baseball-sunset-wallpaper-preview.jpg);
+            background-position: center center;
+            background-size: cover;
+            background-repeat:no-repeat ;
+            width: 100%;
+            height: 100vh;
+        }
+        #wrap{
+            width: 90%;
+            height: 90vh;
+            background-color: rgba(0, 0, 0, 0.3);
+            position: relative;
+            left: 5%;
+            top: 5%;
+        }
+        #base {
+            background:url(./img/베이스이미지.png) center center no-repeat ;
+            background-size: cover;
+            position: relative;
+            width: 1150px;
+            height: 700px;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, -50%);
+        }
+        #team {
+            text-align: center;
+        }
+
+        #team span {
+            font-size: 40px;
+        }
+
+        #left_team {
+            background:linear-gradient(to right,red,blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #right_team {
+            background:linear-gradient(to right,blue,red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #team span .score{
+            margin: 0 20px;
+        }
+
+        #strikeballout{
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #fff;
+            width: 100%;
+            height: 15%;
+            padding: 0 2%;
+            margin-top: 20px;
+        }
+        #strikeballout ul{
+            height: 100%;
+            width: 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        /* inline-block에서 flex 로 변경 */
+        #strikeballout ul li {
+            display: flex;
+            flex-direction: row;
+            font-size: 30px;
+            align-items: center;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+        }
+        /* 센터맞춤 */
+        #strikeballout ul li:last-child {
+            margin-left: -2px;
+        }
+        /* 센터맞춤 */
+        #strikeballout ul li div {
+            display: flex;
+            margin-left: 10px;
+            width: 100%;
+            margin-top: 5px;
+        }
+         /* 센터맞춤 */
+        #strikeballout ul li:first-child div {
+            margin-left: 12px;
+        }
+        /* 센터맞춤 */
+        #strikeballout ul li:last-child div {
+            margin-left: 8px;
+        }
+
+        #strikeballout ul p {
+            border: 1px solid #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            margin: 0 2%;
+        }
+
+        #turn {
+            font-size: 30px;
+            text-align: center;
+        }
+
+        #turn h3 {
+            background:linear-gradient(to top,skyblue,white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #logBox {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 30%;
+            height: 30%;
+            overflow-y: auto;
+        }
+        /* ul 스크롤바 모양 */
+        .container::-webkit-scrollbar {
+            width: 10px;
+        }
+        .container::-webkit-scrollbar-thumb {
+            background-color: #2f3542;
+            border-radius: 10px;
+        }
+        .container::-webkit-scrollbar-track {
+            background-color: rgb(92, 91, 91);
+            border-radius: 10px;
+            box-shadow: inset 0px 0px 5px white;
+        }        
+        #button {
+            position: absolute;
+            left: 50px;
+            bottom: 40px;
+            color: rgb(198, 230, 22);
+            text-align: center;
+            display: flex;
+            width: 13%;
+            justify-content: space-between;
+        }
+
+        #button input {
+            padding: 10px 10px;
+            width: 160px;
+        }
+
+        #button #attack {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        #button #defense {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #button h3 {
+            margin-bottom: 10px;
+        }
+
+        input {
+            background:linear-gradient(to left,white,skyblue,white);
+            border-radius: 10px;
+            border-color: #fff;
+            margin-bottom: 5px;
+            margin-right: 5px;
+        }
+        
+        #alarm {
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        #character img{
+            width: 100px;
+            height:150px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 1;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 74%;
+        } 
+
+        #character_pitcher img{
+            width: 150px;
+            height:150px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 1;
+            transform: translate(-50%,-50%);
+            left: 53%;
+            top: 40%;
+        }
+        
+        #homerun_img img:nth-child(2){
+            width: 300px;
+            height:300px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 1;
+            transform: translate(-50%,-50%);
+            left: 84%;
+            top: 40%;
+        } 
+        #homerun_img img:nth-child(3){
+            width: 250px;
+            height:300px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 1;
+            transform: translate(-50%,-50%);
+            left: 5%;
+            top: 40%;
+        } 
+
+        #homerun_img img {
+            width: 60%;
+            height:60%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 1;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 40%;
+        } 
+
+        #shift_img {
+            width: 42%;
+            height:60%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 1;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 30%;
+            
+        }
+
+        #shift_img p {
+            font-size: 100px;
+            background:linear-gradient(to left, red,white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: "Tenada";
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #button #attack.hidden{
+            display: none;
+        }
+        #button #defense.hidden{
+            display: none;
+        }
+
+        .on {
+            display: none;
+        }
+        /* 홈~홈 */
+        @keyframes homerun1 {
+            0%{
+                left: 50%;
+                top:74%;
+                opacity: 1;
+            }
+            25%{
+                left: 81%;
+                top: 31%;
+                opacity: 1;
+            }
+            50%{
+                left: 50%;
+                top: 10%;
+                opacity: 1;
+            }
+            75%{
+                left: 18%;
+                top: 33%;
+                opacity: 1;
+            }
+            100%{
+                left: 50%;
+                top: 74%;
+                opacity: 0;
+            }
+        }
+        /* 1루에서 홈까지 */
+        @keyframes homerun2 {
+            0%{
+                left: 81%;
+                top: 31%;
+                opacity: 1;
+            }
+            33%{
+                left: 50%;
+                top: 10%;
+                opacity: 1;
+            }
+            66%{
+                left: 18%;
+                top: 33%;
+                opacity: 1;
+            }
+            100%{
+                left: 50%;
+                top: 74%;
+                opacity: 0;
+            }
+        }
+        /* 2루에서 홈까지 */
+        @keyframes homerun3 {
+            0%{
+                left: 50%;
+                top: 10%;
+                opacity: 1;
+            }
+            50%{
+                left: 18%;
+                top: 33%;
+                opacity: 1;
+            }
+            100%{
+                left: 50%;
+                top: 74%;
+                opacity: 0;
+            }
+        }
+        /* 3루~홈 */
+        @keyframes homerun4 {
+            0%{
+                left: 18%;
+                top:33%;
+            }
+            100%{
+                left: 50%;
+                top: 74%;
+                opacity: 0;
+            }
+        }
+        .homerun1{
+            animation: homerun1 3s forwards;
+        }
+        .homerun2{
+            animation: homerun2 3s forwards;
+        }
+        .homerun3{
+            animation: homerun3 3s forwards;
+        }
+        .homerun4{
+            animation: homerun4 3s forwards;
+        }
+        #login{
+            position: relative;
+           width: 100%;
+           height: 100vh;
+            background: url(./img/loginimg.jpg) center center no-repeat;
+            background-size: contain;
+           z-index: 2;
+       }
+       #login h1{
+        position: absolute;
+        left: 50%;
+        top: 55%;
+        transform: translate(-50%,-50%);
+        color: #222;
+        font-weight: bold;
+       }
+       #logininput  {
+        position: absolute;
+        left: 50%;
+        top: 60%;
+        transform: translate(-50%,-50%);
+        width: 40%;
+        height: 5%;
+        background:none;
+        background-color: white;
+        font-size: 34px;
+        border: 3px solid #333;
+       }
+       #login button{
+        width: 10%;
+        height: 5%;
+        left: 76%;
+        top: 60%;
+        transform: translate(-50%,-50%);
+        position: absolute;
+        border-radius: 20px;
+        background-color: #fff;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+       }
+       
+       #end_game {
+            background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+            width: 600px;
+            height: 600px;
+            text-align: center;
+            font-family: "Tenada";
+            border-radius: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            position: absolute;
+            box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            opacity: 1;
+        }
+
+        #end_game p:first-child {
+            color: red;
+        }
+
+        #end_game h2 {
+            font-size: 80px;
+        }
+
+        #end_game h3 {
+            font-size: 50px;
+        }
+        
+        #end_game p {
+            font-size: 80px;
+        }
+        #end_game h4 {
+            font-size: 50px;
+        }
+        
+        #wrap #end_game.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="login">
+        <h1>유저의 이름을 입력해주세요</h1>
+        <form action="">
+            <input type="text" id="logininput" required maxlength="6">
+            <!-- <button >입력</button> -->
+        </form>
+    </div>
+    <div id="wrap" class="hidden">
+        <h3 id="alarm"></h3>
+        <div id="end_game" class="hidden">
+            <h2>게임종료</h2>
+            <h3></h3>
+            <p>0 : 0</p>
+            <h4></h4>
+        </div>
+        <div id="base">
+            <div id="character">
+                <img src="./img/running-run.gif" id="character1_one" class="" >
+                <img src="./img/running-run.gif" id="character1_two" class="hidden">
+                <img src="./img/running-run.gif" id="character1_three" class="hidden">
+                <img src="./img/running-run.gif" id="character1_four" class="hidden"> 
+            </div>
+            <div id="character_pitcher">
+                <img src="./img/giphy (9).gif" >
+            </div>
+            <div id="homerun_img" class="hidden">
+                <img src="./img/giphy (4).gif" >
+                <img src="./img/lets-go-cheer.gif">
+                <img src="./img/응원.gif">
+                <canvas id="canvas"></canvas>
+            </div>            
+            <div id="shift_img" class="hidden">
+                <img src="./img/giphy (2).gif">
+                <p>공수교대!!</p>
+            </div>
+        </div>
+        <div id="strikeballout">
+            <!-- 스트라이크, 볼, 아웃 입력 -->
+            <ul>
+                <li id="yellow_strike">
+                    <!-- 글자색 노랑 -->
+                    <span>S</span>
+                    <div><p></p><p></p></div>
+                </li>
+                <li id="green_ball">
+                    <!-- 글자색 초록 -->
+                    <span>B</span>
+                    <div><p></p><p></p><p></p></div>
+                </li>
+                <li id="red_out">
+                    <!-- 글자색 빨강 -->
+                    <span>O</span>
+                    <div><p></p><p></p></div>
+                </li>
+            </ul>
+            <!-- 각 팀 이름과 점수 입력 -->
+            <div id="team">
+                <span>
+                    <span id="left_teams">
+                        <span id="left_score" class="score">0</span>
+                        <span id="left_team">남민섭팀</span>
+                    </span>    
+                    vs 
+                    <span id="right_teams">
+                        <span id="right_team">김동현팀</span>
+                        <span id="right_score" class="score">0</span>
+                    </span>
+                </span>
+            </div>
+            <div id="turn">
+                <!-- 몇회 초 말/ STRIKE, BALL, OUT 입력 -->
+                <p>1회 초/말 공격</p>
+                <h3>STRIKE</h3>
+            </div>
+        </div>
+        <div id="logBox" class="container" >
+            <!-- 선수들 활동 기록 -->
+            <ul >
+                
+            </ul>
+        </div>
+        <div id="button">
+            <!-- 공격 수비 입력 버튼들 -->
+            <div id="attack">
+                <h3>공격</h3>
+                <input type="button" value="Swing">
+                <input type="button" value="Skill:진심 스윙">
+                <input type="button" value="Watch">
+            </div>
+            <div id="defense">
+                <h3>수비</h3>
+                <input type="button" value="Pitch">
+                <input type="button" value="Skill:fire Pitc">
+            </div>
+        </div>
+    </div>
+    <script  src="./ballMove2.js"></script> 
+    <script  src="./move.js"></script>
+</body>
+</html>
